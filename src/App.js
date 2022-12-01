@@ -1,22 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
+import { Day01 } from './components/Day01'
 
 function App() {
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          This is my thing for trying the Advent of Code 2022
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Day01 />
       </header>
     </div>
   );
