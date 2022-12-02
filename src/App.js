@@ -1,5 +1,5 @@
 import './App.css';
-import { Day01 } from './components/Day01'
+import { Day02 } from './components/Day02'
 
 function App() {
 
@@ -9,7 +9,7 @@ function App() {
         <p>
           This is my thing for trying the Advent of Code 2022
         </p>
-        <Day01 />
+        <Day02 />
       </header>
     </div>
   );
