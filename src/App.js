@@ -4,7 +4,7 @@ import { DAYS } from './utils/constants'
 import { getSelectedDay } from './utils/getSelectedDay'
 
 function App() {
-  const [selectedDay, setSelectedDay] = useState('Day04')
+  const [selectedDay, setSelectedDay] = useState('Day05')
 
   const options = DAYS.map(day => ({ label: `Day ${day}`, value: `Day${day}`}))
 
