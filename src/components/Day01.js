@@ -8,7 +8,7 @@ export const Day01 = () => {
     return { most, mostIndex }
   }
 
-  const calculate = (input) => {
+  const calculatePart1 = (input) => {
     const lines = input.split("\n")
     let currentIndex = 0
     const totals = lines.reduce((acc, curr, index) => {
@@ -44,7 +44,7 @@ export const Day01 = () => {
   return (
     <Day
       label={"Day 01"}
-      calculate={calculate}
+      calculatePart1={calculatePart1}
     />
   )
 }

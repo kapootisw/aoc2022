@@ -43,7 +43,7 @@ export const Day02 = () => {
     }
   }
 
-  const calculate = (input) => {
+  const calculatePart1 = (input) => {
     const lines = input.split("\n")
     const scores = lines.map(line => {
       const plays = line.split(" ")
@@ -67,7 +67,7 @@ export const Day02 = () => {
   return (
     <Day
       label={"Day 02"}
-      calculate={calculate}
+      calculatePart1={calculatePart1}
     />
   )
 }

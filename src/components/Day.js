@@ -5,9 +5,10 @@ import logo from '../logo.svg'
 export const Day = (props) => {
   const [input, setInput] = useState('')
   const debouncedInput = useDebounce(input, 350)
-  const [output, setOutput] = useState('')
+  const [output1, setOutput1] = useState('')
+  const [output2, setOutput2] = useState('')
   const [calculating, setCalculating] = useState(false)
-  const { label, calculate } = props
+  const { label, calculatePart1, calculatePart2 } = props
 
   const updateInput = ({ target: { value: newInput }}) => {
     setInput(newInput)
@@ -15,8 +16,10 @@ export const Day = (props) => {
 
   const onSubmit = () => {
     setCalculating(true)
-    const result = calculate(debouncedInput)
-    setOutput(result)
+    const result1 = calculatePart1(debouncedInput)
+    const result2 = calculatePart2(debouncedInput)
+    setOutput1(result1)
+    setOutput2(result2)
     setCalculating(false)
   }
 
@@ -43,9 +46,14 @@ export const Day = (props) => {
           >
             Submit
           </button>
-          <p>
-            {output}
-          </p>
+          <div>
+            <p>
+              {output1}
+            </p>
+            <p>
+              {output2}
+            </p>
+          </div>
         </>
       }
     </div>
