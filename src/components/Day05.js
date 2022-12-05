@@ -1,9 +1,7 @@
 import { Day } from './Day'
 
 export const Day05 = () => {
-  const calculatePart1 = (input) => {
-    const lines = input.split('\n')
-
+  function getStacksAndInstructions (lines) {
     const { stacks, instructions } = lines.reduce((acc, line) => {
       if (line === '') {
         acc.doneWithStacks = true
@@ -26,6 +24,13 @@ export const Day05 = () => {
       }
       return acc
     }, { stacks: [], instructions: [], doneWithStacks: false })
+    return { stacks, instructions }
+  }
+
+  const calculatePart1 = (input) => {
+    const lines = input.split('\n')
+
+    const { stacks, instructions } = getStacksAndInstructions(lines)
     console.log(stacks)
     console.log(instructions)
 
