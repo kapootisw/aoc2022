@@ -22,21 +22,12 @@ export const Day01 = () => {
     }, [0])
 
     const { most, mostIndex } = findMost(totals)
-    // console.log(totals.join(","))
-    // console.log(most)
-    // console.log(mostIndex)
 
     totals.splice(mostIndex, 1)
     const { most: secondMost, mostIndex: secondMostIndex } = findMost(totals)
-    // console.log(totals.join(","))
-    // console.log(secondMost)
-    // console.log(secondMostIndex)
 
     totals.splice(secondMostIndex, 1)
-    const { most: thirdMost, mostIndex: thirdMostIndex } = findMost(totals)
-    // console.log(totals.join(","))
-    // console.log(thirdMost)
-    // console.log(thirdMostIndex)
+    const { most: thirdMost } = findMost(totals)
 
     return most + secondMost + thirdMost
   }
