@@ -17,9 +17,11 @@ export const Day = (props) => {
   const onSubmit = () => {
     setCalculating(true)
     const result1 = calculatePart1(debouncedInput)
-    const result2 = calculatePart2(debouncedInput)
     setOutput1(result1)
-    setOutput2(result2)
+    if (calculatePart2) {
+      const result2 = calculatePart2(debouncedInput)
+      setOutput2(result2)
+    }
     setCalculating(false)
   }
 
@@ -47,12 +49,18 @@ export const Day = (props) => {
             Submit
           </button>
           <div>
-            <p>
-              {output1}
-            </p>
-            <p>
-              {output2}
-            </p>
+            {
+              output1 !== '' &&
+              <p>
+                Result 1 = {output1}
+              </p>
+            }
+            {
+              output2 !== '' &&
+              <p>
+                Result 2 = {output2}
+              </p>
+            }
           </div>
         </>
       }
