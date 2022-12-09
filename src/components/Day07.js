@@ -1,8 +1,70 @@
 import { Day } from './Day'
 
 export const Day07 = () => {
+  const getDirectorySumsMax100000 = (directory, sums) => {
+    if (directory.sum <= 100000) {
+      sums.push(directory.sum)
+    }
+
+    const directoryContentKeys = Object.keys(directory)
+    directoryContentKeys.forEach(key => {
+      const currContent = directory[key]
+      if (currContent instanceof Object) {
+        getDirectorySumsMax100000(currContent, sums)
+      }
+    })
+  }
+
+  const getDirectoryStructure = (lines) => {
+    return lines.reduce((acc, line) => {
+      const content = line.split(' ')
+      const start = content[0]
+      const second = content[1]
+      if (start === '$') {
+        if (second === 'cd') {
+          const newDir = content[2]
+          if (newDir === '..') {
+            acc.currentDirectoryPath.pop()
+            const oldDirectorySum = acc.currentDirectory.sum
+            let newCurrentDir = acc.directory
+            acc.currentDirectoryPath.forEach(dir => {
+              newCurrentDir = newCurrentDir[dir]
+            })
+            newCurrentDir.sum = (newCurrentDir.sum ?? 0) + oldDirectorySum
+            acc.currentDirectory = newCurrentDir
+          } else {
+            if (newDir === '/') {
+              acc.directory[newDir] = {}
+              acc.currentDirectory = acc.directory[newDir]
+            } else {
+              acc.currentDirectory[newDir] = {}
+              acc.currentDirectory = acc.currentDirectory[newDir]
+            }
+            acc.currentDirectoryPath.push(newDir)
+            acc.currentDirectory.sum = 0
+          }
+        }
+      } else if (+start) {
+        acc.currentDirectory[second] = Number(start)
+        acc.currentDirectory.sum = acc.currentDirectory.sum + Number(start)
+      }
+      return acc
+    }, { directory: {}, currentDirectoryPath: [], currentDirectory: null })
+  }
+
   const calculatePart1 = (input) => {
-    return input
+    const lines = input.split("\n")
+    const { directory } = getDirectoryStructure(lines)
+    console.log(directory)
+
+    const mainDirectory = directory['/']
+    const sums = []
+    getDirectorySumsMax100000(mainDirectory, sums)
+    console.log(sums)
+
+    return sums.reduce((acc, sum) => {
+      return acc + sum
+    }, 0)
   }
 
   return (
