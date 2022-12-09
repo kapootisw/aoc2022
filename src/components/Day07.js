@@ -15,8 +15,19 @@ export const Day07 = () => {
     })
   }
 
+  const getDirectorySums = (directory, sums) => {
+    const directoryContentKeys = Object.keys(directory)
+    directoryContentKeys.forEach(key => {
+      const currContent = directory[key]
+      if (currContent instanceof Object) {
+        getDirectorySums(currContent, sums)
+      }
+    })
+    sums.push(directory.sum)
+  }
+
   const getDirectoryStructure = (lines) => {
-    return lines.reduce((acc, line) => {
+    const { directory, currentDirectoryPath } = lines.reduce((acc, line) => {
       const content = line.split(' ')
       const start = content[0]
       const second = content[1]
@@ -50,27 +61,53 @@ export const Day07 = () => {
       }
       return acc
     }, { directory: {}, currentDirectoryPath: [], currentDirectory: null })
+
+    let totalSum = 0
+    let newCurrentDir = directory
+    currentDirectoryPath.forEach(dir => {
+      totalSum = totalSum + newCurrentDir[dir].sum
+      newCurrentDir = newCurrentDir[dir]
+    })
+
+    directory['/'].sum = totalSum
+
+    return { directory }
   }
 
   const calculatePart1 = (input) => {
     const lines = input.split("\n")
     const { directory } = getDirectoryStructure(lines)
-    console.log(directory)
 
     const mainDirectory = directory['/']
     const sums = []
     getDirectorySumsMax100000(mainDirectory, sums)
-    console.log(sums)
 
     return sums.reduce((acc, sum) => {
       return acc + sum
     }, 0)
   }
 
+  const calculatePart2 = (input) => {
+    const lines = input.split('\n')
+    const { directory } = getDirectoryStructure(lines)
+
+    const mainDirectory = directory['/']
+    const sums = []
+    getDirectorySums(mainDirectory, sums)
+    const totalUsedSpace = mainDirectory.sum
+    const totalFreeSpace = 70000000 - totalUsedSpace
+    const spaceNeededForUpdate = 30000000 - totalFreeSpace
+
+    const possibleDeletionSums = sums.filter(sum => sum > spaceNeededForUpdate)
+
+    return Math.min(...possibleDeletionSums)
+  }
+
   return (
     <Day
       label={'Day 07'}
       calculatePart1={calculatePart1}
+      calculatePart2={calculatePart2}
     />
   )
 }
