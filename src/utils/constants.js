@@ -1,8 +1,7 @@
-export const DAYS = [
-  '01',
-  '02',
-  '03',
-  '04',
-  '05',
-  '06',
-]
+export const DAYS = () => {
+  const days = []
+  for (let i = 1; i <= 25; i++) {
+    days.push(`${i < 10 ? '0' : ''}${i}`)
+  }
+  return days
+}

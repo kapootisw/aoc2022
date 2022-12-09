@@ -6,7 +6,7 @@ import { getSelectedDay } from './utils/getSelectedDay'
 function App() {
   const [selectedDay, setSelectedDay] = useState('Day06')
 
-  const options = DAYS.map(day => ({ label: `Day ${day}`, value: `Day${day}`}))
+  const options = DAYS().map(day => ({ label: `Day ${day}`, value: `Day${day}`}))
 
   const onChangeDay = (e) => {
     setSelectedDay(e.target.value)
