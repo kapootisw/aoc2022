@@ -3,6 +3,7 @@ import { Day02 } from '../components/Day02'
 import { Day03 } from '../components/Day03'
 import { Day04 } from '../components/Day04'
 import { Day05 } from '../components/Day05'
+import { Day06 } from '../components/Day06'
 
 export const getSelectedDay = (selectedDay) => {
   switch (selectedDay) {
@@ -16,6 +17,8 @@ export const getSelectedDay = (selectedDay) => {
       return <Day04/>
     case 'Day05':
       return <Day05/>
+    case 'Day06':
+      return <Day06/>
     default:
       return <div>No Such Day</div>
   }
